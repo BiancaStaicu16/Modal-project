@@ -1,9 +1,22 @@
 <template>
   <h1>{{ title }}</h1>
-  <Modal />
+  <div v-if="showModal">
+    <Modal theme="" @close="toogleModal">
+      <template v-slot:links>
+        <a href="#">Get your package now</a>
+        <a href="#">More info</a>  
+      </template>
+      <h1>Choose your module!</h1>
+      <p>Each module is explained carefully by our best!</p>
+      
+    </Modal>
+  </div>
   <br>
   <input type="text" ref="name">
   <button @click="handleClick">Click me</button>
+  <br>
+  <p>Welcome...</p>
+  <button @click="toogleModal">Open Modal</button>
 </template>
 
 <script>
@@ -11,10 +24,13 @@ import Modal from './components/Modal.vue'
 
 export default {
   name: 'App',
-  components: {Modal },
+  components: { Modal },
   data() {
     return{
-      title: 'My First Vue App :)'
+      title: 'My First Vue App :)',
+      header: 'Sign up for learning more!',
+      text: 'Decide on something to learn and get started!',
+      showModal: false
     }
   },
   methods: {
@@ -22,6 +38,9 @@ export default {
       console.log(this.$refs.name)
       this.$refs.name.classList.add('active')
       this.$refs.name.focus()
+    },
+    toogleModal() {
+      this.showModal = !this.showModal
     }
   }
 }
